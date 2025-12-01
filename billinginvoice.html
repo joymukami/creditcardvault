@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Invoice</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Create Invoice</h1>
+
+    {% if message %}
+        <p class="message">{{ message }}</p>
+    {% endif %}
+
+    <form method="POST" class="form-box">
+        <label>Select Customer</label>
+        <select name="customer_id" required>
+            <option disabled selected>Choose Customer</option>
+            {% for customer in customers %}
+                <option value="{{ customer['customer_id'] }}">
+                    {{ customer['cardholder_name'] }}
+                </option>
+            {% endfor %}
+        </select>
+
+
+        <label>Amount (USD)</label>
+        <input type="number" name="amount" step="0.01" required>
+
+        <button type="submit" class="btn">Generate Invoice</button>
+    </form>
+
+    {% if card %}
+        <h3>Card Used</h3>
+        <p>Card Type: {{ card['card_type'] }}</p>
+        <p>Cardholder: {{ card['cardholder_name'] }}</p>
+        <p>Last 4 Digits: {{ card['last4'] }}</p>
+        <p>Expiry: {{ card['expiry_month'] }}/{{ card['expiry_year'] }}</p>
+        <p>Invoice Amount: ${{ amount }}</p>
+        <p>Status: Payment simulated successfully ✅</p>
+    {% endif %}
+
+    <br>
+    <a href="/billing/dashboard" class="btn">Back to Dashboard</a>
+</div>
+</body>
+</html>

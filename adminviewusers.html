@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Users</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>All Users</h1>
+
+        {% if message %}
+            <p class="message">{{ message }}</p>
+        {% endif %}
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user[0] }}</td>
+                    <td>{{ user[1] }}</td>
+                    <td>{{ user[2] }}</td>
+
+                    <td>
+                        <a href="/admin/edit_user/{{ user[0] }}" class="btn small">Edit</a>
+                        <a href="/admin/delete_user/{{ user[0] }}" 
+                           onclick="return confirm('Are you sure you want to delete this user?');"
+                           class="btn delete small">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <br>
+        <a href="/admin/dashboard" class="btn">Back to Dashboard</a>
+    </div>
+
+</body>
+</html>

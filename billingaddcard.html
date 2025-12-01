@@ -1,0 +1,32 @@
+<form method="POST" class="form-box">
+    <label>Select Customer</label>
+    <select name="customer_id" required>
+        <option disabled selected>Choose Customer</option>
+        {% for customer in customers %}
+            <option value="{{ customer[0] }}">{{ customer[1] }}</option>
+        {% endfor %}
+    </select>
+
+    <label>Cardholder Name</label>
+    <input type="text" name="cardholder_name" required>
+
+    <label>Card Type</label>
+    <select name="card_type" required>
+        <option disabled selected>Choose type</option>
+        <option value="Visa">Visa</option>
+        <option value="MasterCard">MasterCard</option>
+        <option value="Amex">Amex</option>
+        <option value="Discover">Discover</option>
+    </select>
+
+    <label>Card Number</label>
+    <input type="text" name="card_number" maxlength="16" required>
+
+    <label>Expiry Month</label>
+    <input type="number" name="expiry_month" min="1" max="12" required>
+
+    <label>Expiry Year</label>
+    <input type="number" name="expiry_year" min="2025" max="2100" required>
+
+    <button type="submit" class="btn">Store Card</button>
+</form>

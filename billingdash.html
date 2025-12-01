@@ -1,0 +1,36 @@
+<div class="dashboard">
+    <h2>Accountant Dashboard</h2>
+
+    <div class="card">
+        <h3>Invoices</h3>
+        <a href="/accountant/view_invoices.html" class="btn">View All Invoices</a>
+    </div>
+
+    <div class="card">
+        <h3>Customers</h3>
+        <a href="/accountant/view_customers.html" class="btn">View Customers</a>
+    </div>
+</div>
+<table  cellpadding="5" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Customer ID</th>
+            <th>Full Name</th>
+            <th>Stored Cards</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for customer in customers %}
+        <tr>
+            <td>{{ customer['customer_id'] }}</td>
+            <td>{{ customer['full_name'] }}</td>
+            <td>
+                {% for card in customer['cards'] %}
+                    {{ card['card_type'] }} ••••{{ card['last4'] }}<br>
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+

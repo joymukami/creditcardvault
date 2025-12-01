@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit User Role</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>Edit User Role</h1>
+
+        {% if message %}
+            <p class="message">{{ message }}</p>
+        {% endif %}
+
+        <form method="POST" class="form-box">
+
+            <label>Username</label>
+            <input type="text" value="{{ user[1] }}" disabled>
+
+            <label>Current Role</label>
+            <input type="text" value="{{ user[2] }}" disabled>
+
+            <label>Assign New Role</label>
+            <select name="role_id" required>
+                {% for role in roles %}
+                    <option value="{{ role[0] }}">{{ role[1] }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit" class="btn">Update Role</button>
+
+        </form>
+
+        <br>
+        <a href="/admin/users" class="btn">Back</a>
+
+    </div>
+
+</body>
+</html>
